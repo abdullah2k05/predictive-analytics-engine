@@ -1,0 +1,31 @@
+const DEFAULT_API_URL = "https://your-render-backend.onrender.com";
+
+export const API_BASE_URL =
+  process.env.EXPO_PUBLIC_API_BASE_URL || DEFAULT_API_URL;
+
+export async function fetchModels() {
+  const response = await fetch(`${API_BASE_URL}/models`);
+
+  if (!response.ok) {
+    throw new Error("Unable to load models");
+  }
+
+  return response.json();
+}
+
+export async function predictModel(modelId, payload) {
+  const response = await fetch(`${API_BASE_URL}/predict/${modelId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(errorBody.detail || "Prediction failed");
+  }
+
+  return response.json();
+}

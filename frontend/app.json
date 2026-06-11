@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "E-Commerce Analytics",
+    "slug": "ecommerce-customer-analytics",
+    "scheme": "ecommerceanalytics",
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router"]
+  }
+}
