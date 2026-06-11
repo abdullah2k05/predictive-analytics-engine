@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { Link } from "expo-router";
-import { fetchModels } from "../src/api";
+import { API_BASE_URL, fetchModels } from "../src/api";
 
 const heroMetrics = [
   { label: "Models ready", value: "3-5" },
@@ -97,6 +97,7 @@ export default function HomeScreen() {
           <Text style={styles.sectionCaption}>
             Uploaded models appear here automatically from the API.
           </Text>
+          <Text style={styles.sectionCaption}>API base: {API_BASE_URL}</Text>
         </View>
 
         <TextInput
@@ -117,8 +118,9 @@ export default function HomeScreen() {
             <Text style={styles.stateTitle}>Unable to load models</Text>
             <Text style={styles.stateText}>{error}</Text>
             <Text style={styles.stateHint}>
-              Set EXPO_PUBLIC_API_BASE_URL to your Render API URL before
-              deploying.
+              The frontend is reading the API URL from EXPO_PUBLIC_API_BASE_URL.
+              Check the deployed value and make sure it points to the Render
+              service root, not a path like /models.
             </Text>
           </View>
         ) : visibleModels.length === 0 ? (

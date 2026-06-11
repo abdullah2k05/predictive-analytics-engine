@@ -98,6 +98,7 @@ app = FastAPI(title="E-Commerce Customer Analytics API")
 app.add_middleware(
   CORSMiddleware,
   allow_origins=ALLOWED_ORIGINS,
+  allow_origin_regex=os.getenv("ALLOWED_ORIGIN_REGEX", r"https://.*\.vercel\.app"),
   allow_credentials=False,
   allow_methods=["*"],
   allow_headers=["*"],
