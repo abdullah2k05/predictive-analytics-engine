@@ -5,7 +5,7 @@ import joblib as jb
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
-data = pd.read_csv('dataSet.csv')
+data = pd.read_csv('data/dataSet.csv')
 
 #print(data.head())
 
