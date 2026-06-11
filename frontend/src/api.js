@@ -1,7 +1,10 @@
-const DEFAULT_API_URL = "https://your-render-backend.onrender.com";
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
 
-export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_BASE_URL || DEFAULT_API_URL;
+if (!API_BASE_URL) {
+  throw new Error("EXPO_PUBLIC_API_BASE_URL is required");
+}
+
+export { API_BASE_URL };
 
 export async function fetchModels() {
   const response = await fetch(`${API_BASE_URL}/models`);

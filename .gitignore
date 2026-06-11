@@ -1,0 +1,91 @@
+# ======================
+# Python cache
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# ======================
+# Virtual environments
+# ======================
+venv/
+env/
+.venv/
+ENV/
+
+# ======================
+# IDEs
+# ======================
+.vscode/
+.idea/
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Environment variables
+# ======================
+.env
+.env.*
+!.env.example
+
+# ======================
+# Logs
+# ======================
+logs/
+*.log
+
+# ======================
+# Jupyter Notebooks
+# ======================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ======================
+# ML / Data files (VERY IMPORTANT)
+# ======================
+
+*.joblib
+*.h5
+*.keras
+*.model
+
+# If you want to keep models in repo, REMOVE these lines ↑
+
+# ======================
+# Data files (optional)
+# ======================
+data/
+*.csv
+*.parquet
+
+# Keep this if dataset is large or sensitive
+
+# ======================
+# FastAPI / local server
+# ======================
+*.sqlite3
+
+# ======================
+# Docker (optional cleanup)
+# ======================
+docker-compose.override.yml
+
+# ======================
+# Coverage / testing
+# ======================
+htmlcov/
+.coverage
+.pytest_cache/
+
+# ======================
+# Misc
+# ======================
+dist/
+build/

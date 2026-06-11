@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 import joblib as jb
 from fastapi import FastAPI, HTTPException
@@ -6,6 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 BASE_DIR = Path(__file__).resolve().parent
+ALLOWED_ORIGINS = [
+  origin.strip()
+  for origin in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:19006").split(",")
+  if origin.strip()
+]
 MODEL_CONFIGS = {
   "churn_model": {
     "name": "Churn Prediction",
@@ -22,8 +28,8 @@ MODEL_CONFIGS = {
 app = FastAPI(title="E-Commerce Customer Analytics API")
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["*"],
-  allow_credentials=True,
+  allow_origins=ALLOWED_ORIGINS,
+  allow_credentials=False,
   allow_methods=["*"],
   allow_headers=["*"],
 )
@@ -43,7 +49,6 @@ def discover_models():
           "description",
           "Uploaded predictive model ready for selection.",
         ),
-        "file_name": model_path.name,
         "input_fields": model_config.get("input_fields", []),
         "available": True,
       }
@@ -57,9 +62,9 @@ def load_model(model_id: str):
   if model_info is None:
     raise HTTPException(status_code=404, detail="Model not found")
 
-  model_path = BASE_DIR / model_info["file_name"]
+  model_path = BASE_DIR / f"{model_info['id']}.pkl"
   if not model_path.exists():
-    raise HTTPException(status_code=404, detail=f'Model file "{model_info["file_name"]}" is missing')
+    raise HTTPException(status_code=404, detail="Model file is missing")
 
   return model_info, jb.load(model_path)
 
