@@ -16,6 +16,17 @@ export async function fetchModels() {
   return response.json();
 }
 
+export async function fetchModelSchema(modelId) {
+  const response = await fetch(`${API_BASE_URL}/models/${modelId}`);
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(errorBody.detail || "Unable to load model schema");
+  }
+
+  return response.json();
+}
+
 export async function predictModel(modelId, payload) {
   const response = await fetch(`${API_BASE_URL}/predict/${modelId}`, {
     method: "POST",
